@@ -1,4 +1,4 @@
-import { ActivePlayers } from 'boardgame.io/core';
+const { ActivePlayers } = require('boardgame.io/core');
 
 function resetBuzzers(G) {
   G.queue = {};
@@ -14,18 +14,18 @@ function toggleLock(G) {
   G.locked = !G.locked;
 }
 
-function buzz(G, ctx, id) {
+function buzz(G, ctx, id, timestamp) {
   const newQueue = {
     ...G.queue,
   };
   if (!newQueue[id]) {
-    // buzz on server will overwrite the client provided timestamp
-    newQueue[id] = { id, timestamp: new Date().getTime() };
+    // Use client-provided timestamp for fair ordering
+    newQueue[id] = { id, timestamp: timestamp || new Date().getTime() };
   }
   G.queue = newQueue;
 }
 
-export const Buzzer = {
+const Buzzer = {
   name: 'buzzer',
   minPlayers: 2,
   maxPlayers: 200,
@@ -40,3 +40,5 @@ export const Buzzer = {
     },
   },
 };
+
+module.exports = { Buzzer };

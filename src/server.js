@@ -1,7 +1,7 @@
-import path from 'path';
-import serve from 'koa-static';
-import ratelimit from 'koa-ratelimit';
-import { v4 as uuidv4 } from 'uuid';
+const path = require('path');
+const serve = require('koa-static');
+const ratelimit = require('koa-ratelimit');
+const { v4: uuidv4 } = require('uuid');
 
 const Server = require('boardgame.io/server').Server;
 const Buzzer = require('./lib/store').Buzzer;
@@ -26,6 +26,15 @@ function randomString(length, chars) {
     result += chars[Math.floor(Math.random() * chars.length)];
   return result;
 }
+
+// Time sync endpoint for client clock offset calculation
+app.use(async (ctx, next) => {
+  if (ctx.path === '/api/time') {
+    ctx.body = { serverTime: Date.now() };
+    return;
+  }
+  await next();
+});
 
 // rate limiter
 const db = new Map();

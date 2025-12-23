@@ -8,7 +8,7 @@
     "node": "20.12.2"
   },
   "scripts": {
-    "start": "node -r esm src/server.js",
+    "start": "node src/server.js",
     "dev": "concurrently \"PORT=4000 yarn client\" \"PORT=4001 yarn start\"",
     "client": "react-scripts start",
     "build": "react-scripts build",

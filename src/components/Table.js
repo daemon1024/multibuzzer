@@ -4,6 +4,7 @@ import { Howl } from 'howler';
 import { AiOutlineDisconnect } from 'react-icons/ai';
 import { Container } from 'react-bootstrap';
 import Header from '../components/Header';
+import { calculateClockOffset } from '../lib/endpoints';
 
 export default function Table(game) {
   const [loaded, setLoaded] = useState(false);
@@ -13,8 +14,17 @@ export default function Table(game) {
   const [lastBuzz, setLastBuzz] = useState(null);
   const [sound, setSound] = useState(false);
   const [soundPlayed, setSoundPlayed] = useState(false);
+  const [clockOffset, setClockOffset] = useState(0);
   const buzzButton = useRef(null);
   const queueRef = useRef(null);
+
+  // Calculate clock offset with server on mount
+  useEffect(() => {
+    calculateClockOffset().then((offset) => {
+      console.log('Clock offset from server:', offset, 'ms');
+      setClockOffset(offset);
+    });
+  }, []);
 
   const buzzSound = new Howl({
     src: [
@@ -67,9 +77,12 @@ export default function Table(game) {
   const attemptBuzz = () => {
     if (!buzzed) {
       playSound();
-      game.moves.buzz(game.playerID);
+      const clientTime = Date.now();
+      // Convert client time to server time by subtracting the offset
+      const serverAdjustedTime = clientTime - clockOffset;
+      game.moves.buzz(game.playerID, serverAdjustedTime);
       setBuzzer(true);
-      setLastBuzz(Date.now());
+      setLastBuzz(clientTime);
     }
   };
 
