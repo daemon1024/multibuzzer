@@ -27,12 +27,9 @@ export default function Table(game) {
   }, []);
 
   const buzzSound = new Howl({
-    src: [
-      `${process.env.PUBLIC_URL}/shortBuzz.webm`,
-      `${process.env.PUBLIC_URL}/shortBuzz.mp3`,
-    ],
-    volume: 0.5,
-    rate: 1.5,
+    src: [`${process.env.PUBLIC_URL}/hohoho.mp3`],
+    volume: 0.8,
+    rate: 1.0,
   });
 
   const playSound = () => {

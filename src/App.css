@@ -1,19 +1,19 @@
 :root {
-  --backgroundColor: #282c35;
-  --lightBackgroundColor: #343a48;
-  --redColor: #d0021b;
-  --lightRedColor: #e36776;
-  --yellowColor: #fff3c8;
-  --greenColor: #a7ff91;
-  --lightBlueColor: #aed1fb;
-  --hoverBlueColor: #4898f6;
-  --brightBlueColor: #348df5;
-  --activeColor: #3b404b;
-  --dimTextColor: #a7a9ae;
-  --disabledTextColor: #57595c;
-  --paragraphColor: #b4b4b4;
-  --darkBlueColor: #2c313e;
-  --disabledBlueColor: #1a477b;
+  --backgroundColor: #1a2e1a;
+  --lightBackgroundColor: #2d4a2d;
+  --redColor: #c41e3a;
+  --lightRedColor: #ff6b6b;
+  --yellowColor: #ffd700;
+  --greenColor: #228b22;
+  --lightBlueColor: #98fb98;
+  --hoverBlueColor: #dc143c;
+  --brightBlueColor: #c41e3a;
+  --activeColor: #3d5a3d;
+  --dimTextColor: #b8d4b8;
+  --disabledTextColor: #5a7a5a;
+  --paragraphColor: #c8e6c8;
+  --darkBlueColor: #0f1f0f;
+  --disabledBlueColor: #8b0000;
 }
 
 html,
